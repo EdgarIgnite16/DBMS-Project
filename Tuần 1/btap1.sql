@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE spud_PTBac01
-@a int, @b int, @c int
+﻿CREATE PROC spud_PTBac01
+@a INT, @b INT, @c INT
 AS
 	BEGIN
 		IF (@a =0 AND @b=0)
