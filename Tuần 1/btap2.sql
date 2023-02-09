@@ -1,4 +1,4 @@
-ALTER PROC InBangCuuChuong
+CREATE PROC InBangCuuChuong
     @x int
 AS
     BEGIN
@@ -6,7 +6,7 @@ AS
         WHILE @i <= 10
             BEGIN
                 DECLARE @kq INT = @x * @i
-                PRINT @kq
+                PRINT CONCAT(@x, ' x ', @i, ' = ', @kq)
                 
                 -- tang gia tri
                 SET @i = @i + 1
@@ -14,4 +14,4 @@ AS
     END
 GO
 
-EXEC InBangCuuChuong 5
+EXEC InBangCuuChuong 4
