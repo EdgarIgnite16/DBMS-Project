@@ -5,7 +5,7 @@ AS
     BEGIN
         IF (EXISTS(SELECT * FROM Khoa K WHERE K.TenKhoa = @tenKhoa))
             BEGIN
-                IF (EXISTS(SELECT * FROM Khoa K WHERE K.SoLuong >= 100))
+                IF (EXISTS(SELECT * FROM Khoa K WHERE K.SoLuong >= 100 AND K.TenKhoa = @tenKhoa))
                     BEGIN
                         PRINT N'Đã tuyển sinh đủ'
                     END
