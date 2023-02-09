@@ -1,4 +1,4 @@
-CREATE PROC InBangCuuChuong
+CREATE PROC spud_InBangCuuChuong
     @x int
 AS
     BEGIN
@@ -14,4 +14,4 @@ AS
     END
 GO
 
-EXEC InBangCuuChuong 4
+EXEC spud_InBangCuuChuong 4
