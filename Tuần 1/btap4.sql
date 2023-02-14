@@ -8,7 +8,7 @@ AS
                 -- In ra bảng
                 SELECT SV.TenSinhVien as N'Tên Sinh Viên', MH.TenMon as N'Tên Môn Học', KQ.Diem as N'Điểm' 
                 FROM SinhVien SV, KetQua KQ, MonHoc MH
-                WHERE SV.MaSV = KQ.MaSV AND KQ.MaMH = MH.MaMH
+                WHERE SV.MaSV = KQ.MaSV AND KQ.MaMH = MH.MaMH AND SV.MaSV = @maSinhVien
             END
         ELSE 
             BEGIN

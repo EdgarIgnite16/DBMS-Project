@@ -9,18 +9,29 @@ AS
             BEGIN
                 -- Khởi tạo biến
                 DECLARE @DiemSoCuaSinhVien FLOAT 
+                DECLARE @TenSinhVien NVARCHAR(30)
+                DECLARE @TenMonHoc NVARCHAR(30)
                 
                 -- Gán giá trị ta select được vào biến vừa được khởi tạo
+                -- Tên Sinh Viên
+                SELECT @TenSinhVien = SV.TenSinhVien FROM SinhVien SV
+                WHERE SV.MaSV = @maSinhVien
+
+                -- Tên Môn Học
+                SELECT @TenMonHoc = MH.TenMonHoc FROM MonHoc MH
+                WHERE MH.MaMH = @maMonHoc
+
+                -- Điểm số
                 SELECT @DiemSoCuaSinhVien = KQ.Diem FROM KetQua KQ
                 WHERE KQ.MaSV = @maSinhVien AND KQ.MaMH = @maMonHoc
 
                 IF (@DiemSoCuaSinhVien > 5) 
                     BEGIN 
-                        PRINT N'Đạt'
+                        PRINT CONCAT(@TenSinhVien, " | ", @TenMonHoc, " | ", N'Đạt', " | ")
                     END
                 ELSE
                     BEGIN
-                        PRINT N'Chưa đạt'
+                        PRINT CONCAT(@TenSinhVien, " | ", @TenMonHoc, " | ", N'Chưa Đạt', " | ")
                     END
             END
         ELSE 
