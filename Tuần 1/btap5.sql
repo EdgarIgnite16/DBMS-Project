@@ -27,11 +27,11 @@ AS
 
                 IF (@DiemSoCuaSinhVien > 5) 
                     BEGIN 
-                        PRINT CONCAT(@TenSinhVien, " | ", @TenMonHoc, " | ", N'Đạt', " | ")
+                        PRINT CONCAT(@TenSinhVien, " | ", @TenMonHoc, " | ", @DiemSoCuaSinhVien, " | ", N'Đạt', " | ")
                     END
                 ELSE
                     BEGIN
-                        PRINT CONCAT(@TenSinhVien, " | ", @TenMonHoc, " | ", N'Chưa Đạt', " | ")
+                        PRINT CONCAT(@TenSinhVien, " | ", @TenMonHoc, " | ", @DiemSoCuaSinhVien, " | ", N'Chưa Đạt', " | ")
                     END
             END
         ELSE 
