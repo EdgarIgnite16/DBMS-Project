@@ -1,4 +1,3 @@
--- Bài 1
 CREATE FUNCTION fn_TinhHocBong(@Ma_Sinh_Vien VARCHAR(30))
 RETURNS INT
 AS
@@ -25,5 +24,10 @@ AS
                 SET @TienHocBong = 200000
                 RETURN @TienHocBong
             END
+
+            
+        -- Trường hợp còn lại
+        SET @TienHocBong = 0
+        RETURN @TienHocBong
     END
 GO

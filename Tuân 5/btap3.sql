@@ -5,5 +5,5 @@ AS
     FROM SINH_VIEN SV, KET_QUA KQ 
     WHERE SV.MaSV = KQ.MaSV 
     GROUP BY SV.MaSV, TenSV
-    HAVING AVG(Diem) < @nguong
+    HAVING AVG(Diem) <= @nguong
 GO
