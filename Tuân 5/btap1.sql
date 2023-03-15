@@ -27,14 +27,3 @@ AS
             END
     END
 GO
-
--- Bài 3
-CREATE FUNCTION fn_DSKhongDat(@nguong FLOAT)
-RETURNS TABLE
-AS
-    RETURN SELECT SV.MaSV, TenSV, AVG(DIEM) AS DiemTB 
-    FROM SINH_VIEN SV, KET_QUA KQ 
-    WHERE SV.MaSV = KQ.MaSV 
-    GROUP BY SV.MaSV, TenSV
-    HAVING AVG(Diem) < @nguong
-GO
