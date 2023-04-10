@@ -8,7 +8,6 @@ AS
                 DECLARE @soLuongThiSinhDuTHiCuaTruong INT
                 SELECT @soLuongThiSinhDuTHiCuaTruong = COUNT(kq.SOBD) FROM THISINH ts, KETQUA kq
                 WHERE  ts.MATRUONG = @maTruong AND ts.SOBD = kq.SOBD
-                GROUP BY kq.SOBD
 
                 RETURN @soLuongThiSinhDuTHiCuaTruong
             END
@@ -23,9 +22,9 @@ GO
 CREATE FUNCTION func_DemSoThiSinhDiemLiet(@maTruong NVARCHAR(30))
 RETURNS TABLE
 AS
-    RETURN SELECT COUNT(kq.SOBD) FROM THISINH ts, KETQUA kq
+    RETURN SELECT trg.TENTRUONG, COUNT(kq.SOBD) FROM TRUONG trg, THISINH ts, KETQUA kq
     WHERE  ts.MATRUONG = @maTruong AND ts.SOBD = kq.SOBD AND kq.DIEM <= 1
-    GROUP BY kq.SOBD
+    GROUP BY kq.SOBD, trg.TENTRUONG
 GO
 
 -- Cau 3
