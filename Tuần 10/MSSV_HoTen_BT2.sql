@@ -105,7 +105,20 @@ ORDER BY SUBSTRING(BXH.HIEUSO, 1, 1) DESC
 
 --Phần 5: Truy vấn con
 --18. Cho biết mã câu lạc bộ, tên câu lạc bộ, tên sân vận động, địa chỉ và số lượng cầu thủ nước ngoài (có quốc tịch khác “Việt Nam”)
---tương ứng của các câu lạc bộ có nhiều hơn 2 cầu thủ nước ngoài.
+-- tương ứng của các câu lạc bộ có nhiều hơn 2 cầu thủ nước ngoài.
+SELECT clb.MACLB, clb.TENCLB, svd.TENSAN, svd.DIACHI, TEMP.SL AS N'Số lượng cầu thủ nước ngoài'
+FROM CAULACBO clb, SANVD svd, (
+    -- Bảng này trả về Mã CLB có SL cầu thủ nước ngoài lơn hơn 2
+    SELECT clb.MACLB, COUNT(*) AS N'SL'
+    FROM CAULACBO clb, CAUTHU ct, QUOCGIA qg
+    WHERE qg.TENQG != 'Việt Nam'
+    AND qg.MAQG = ct.MAQG
+    AND ct.MACLB = clb.MACLB
+    GROUP BY clb.MACLB
+    HAVING COUNT(*) >= 2
+) temp
+WHERE clb.MASAN = svd.MASAN
+AND clb.MACLB = temp.MACLB
 
 
 --19. Cho biết tên câu lạc bộ, tên tỉnh mà CLB đang đóng có hiệu số bàn thắng bại cao nhất năm 2009.
