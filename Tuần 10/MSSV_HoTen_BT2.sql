@@ -120,9 +120,16 @@ FROM CAULACBO clb, SANVD svd, (
 WHERE clb.MASAN = svd.MASAN
 AND clb.MACLB = temp.MACLB
 
-
 --19. Cho biết tên câu lạc bộ, tên tỉnh mà CLB đang đóng có hiệu số bàn thắng bại cao nhất năm 2009.
-
+SELECT clb.TENCLB, t.TENTINH 
+FROM CAULACBO clb, TINH t, BANGXH bxh
+WHERE clb.MATINH = t.MATINH
+AND bxh.MACLB = clb.MACLB
+AND bxh.HIEUSO = (
+    -- Lấy ra hiệu số bàn thắng cao nhất trong năm 2019
+    SELECT MAX(bxh.HIEUSO)
+    WHERE bxh.NAM = 2019
+)
 
 --20. Cho biết danh sách các trận đấu (NGAYTD, TENSAN, TENCLB1, TENCLB2, KETQUA) của câu lạc bộ CLB có thứ hạng thấp nhất trong bảng xếp hạng vòng 3 năm 2009.
 
