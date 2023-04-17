@@ -132,7 +132,32 @@ AND bxh.HIEUSO = (
 )
 
 --20. Cho biết danh sách các trận đấu (NGAYTD, TENSAN, TENCLB1, TENCLB2, KETQUA) của câu lạc bộ CLB có thứ hạng thấp nhất trong bảng xếp hạng vòng 3 năm 2009.
-
+-- Để làm đơn giản hơn ta tách câu truy vấn thành 2 lần truy vấn và Giao kết quả lại với nhau để ra một kết quả chung
+SELECT td.NGAYTD, svd.TENSAN, clb1.TENCLB, td.KETQUA
+FROM SANVD svd, TRANDAU td, (
+    -- Lấy ra CLB có thứ hạng thấp nhất trong vòng 3 năm 2009
+    SELECT TOP(1) clb.MACLB 
+    FROM CAULACBO clb, BANGXH bxh
+    WHERE clb.MACLB = bxh.MACLB
+    AND bxh.NAM = 2009
+    AND bxh.VONG = 3
+    ORDER BY bxh.HANG DESC
+) clb1
+WHERE clb1.MACLB = td.MACLB1
+AND td.MASAN = svd.MASAN
+UNION
+SELECT td.NGAYTD, svd.TENSAN, clb1.TENCLB, td.KETQUA
+FROM SANVD svd, TRANDAU td, (
+    -- Lấy ra CLB có thứ hạng thấp nhất trong vòng 3 năm 2009
+    SELECT TOP(1) clb.MACLB 
+    FROM CAULACBO clb, BANGXH bxh
+    WHERE clb.MACLB = bxh.MACLB
+    AND bxh.NAM = 2009
+    AND bxh.VONG = 3
+    ORDER BY bxh.HANG DESC
+) clb2
+WHERE clb1.MACLB = td.MACLB2
+AND td.MASAN = svd.MASAN
 
 --21. Cho biết mã câu lạc bộ, tên câu lạc bộ đã tham gia thi đấu với tất cả các câu lạc bộ còn lại (kể cả sân nhà và sân khách) trong mùa giải năm 2009.
 
