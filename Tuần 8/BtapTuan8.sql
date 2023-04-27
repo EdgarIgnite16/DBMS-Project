@@ -5,11 +5,19 @@ AS
     BEGIN
         IF EXISTS(SELECT * FROM TRUONG WHERE MATRUONG = @maTruong)
             BEGIN
+<<<<<<< Updated upstream
                 DECLARE @soLuongThiSinhDuTHiCuaTruong INT
                 SELECT @soLuongThiSinhDuTHiCuaTruong = COUNT(kq.SOBD) FROM THISINH ts, KETQUA kq
                 WHERE  ts.MATRUONG = @maTruong AND ts.SOBD = kq.SOBD
 
                 RETURN @soLuongThiSinhDuTHiCuaTruong
+=======
+				SELECT * FROM THISINH 
+				WHERE SOBD IN (SELECT TS.SOBD 
+								FROM THISINH TS JOIN KETQUA KQ ON TS.SOBD =KQ.SOBD 
+								WHERE TS.MATR=@matr 
+								group by TS.SOBD )
+>>>>>>> Stashed changes
             END
         ELSE
             BEGIN
